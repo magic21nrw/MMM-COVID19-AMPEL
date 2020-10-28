@@ -10,7 +10,7 @@
 Module.register("MMM-COVID19-AMPEL", {
   defaults: {
     header: 'COVID-19 Inzidenzwert',
-    cityID: "224", // City ID from  https://services7.arcgis.com/
+    cityID: "224", // City ID from  https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data
     infoRowClass: "small", // small, medium
     updateInterval: 3600000, // update interval in milliseconds
     fadeSpeed: 4000
