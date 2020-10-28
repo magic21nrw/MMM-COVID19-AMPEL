@@ -1,0 +1,30 @@
+.covidAmpel {
+  border-collapse: collapse!important;
+}
+
+.covidAmpel .small {
+  font-size: 14px;
+  align-content: center;
+}
+
+.covidAmpel .medium {
+  font-size: 20px;
+  align-content: center;
+}
+
+.covidAmpel .darkred {
+  background-color: #640000;
+  color: #640000;
+}
+.covidAmpel .red {
+  background-color: #FF0000;
+  color: #FF0000;
+}
+.covidAmpel .yellow {
+  background-color: #FFFF00;
+  color: #FFFF00;
+}
+.covidAmpel .green {
+  background-color: #00ff00;
+  color: #00ff00;
+}
