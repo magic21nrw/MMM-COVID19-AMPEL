@@ -41,11 +41,10 @@ The following properties can be configured:
 
 ````javascript
 {
-	module: 'MMM-COVID19-AMPEL',
-	position: 'top_center',
-	header: 'Covid19',
-	config:	{
-	  header: 'COVID-19 Inzidenzwert', // Header Title of Display on MagicMirror
+  module: 'MMM-COVID19-AMPEL',
+  position: 'top_center',
+  config:	{
+    header: 'COVID-19 Inzidenzwert', // Header Title of Display on MagicMirror
     cityID: "224", // City ID from  https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data
     infoRowClass: "small", // small, medium
     updateInterval: 3600000, // update interval in milliseconds // 1 Hour - Values are only refreshed every 24 H on Server
