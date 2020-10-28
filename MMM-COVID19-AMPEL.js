@@ -55,7 +55,7 @@ Module.register("MMM-COVID19-AMPEL", {
   getDom: function () {
     var wrapper = document.createElement("table")
 
-    if (Object.entries(this.globalIncidents).length === 0) return wrapper
+    if (Object.entries(this.globalIncidents).length === 0 || this.globalIncidents === null || globalThis.globalIncidents === undefined) return wrapper
 
     var globalStats = this.globalIncidents
 
