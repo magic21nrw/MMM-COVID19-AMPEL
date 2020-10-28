@@ -3,7 +3,7 @@ A [MagicMirror²](https://magicmirror.builders) helper module to display the COV
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/magic21nrw/MMM-COVID19-AMPEL/master/LICENSE)
 
-![Example](.github/screenshot.png) 
+![Example](screenshot.png) 
 
 ## Installation
 
