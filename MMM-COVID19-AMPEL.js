@@ -10,7 +10,7 @@
 Module.register("MMM-COVID19-AMPEL", {
   defaults: {
     header: 'COVID-19 Inzidenzwert',
-    cityID: "224", // City ID from  https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data
+    cityID: ["224"], // City ID from  https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data
     infoRowClass: "small", // small, medium
     updateInterval: 3600000, // update interval in milliseconds
     fadeSpeed: 4000
@@ -37,7 +37,7 @@ Module.register("MMM-COVID19-AMPEL", {
   },
 
   getInfo: function () {
-   this.sendSocketNotification('GET_INCIDENTS', this.config.cityID)
+    this.sendSocketNotification('GET_INCIDENTS', this.config.cityID)
   },
 
   socketNotificationReceived: function (notification, payload) {
@@ -58,49 +58,55 @@ Module.register("MMM-COVID19-AMPEL", {
     if (Object.entries(this.globalIncidents).length === 0) return wrapper
 
     var globalStats = this.globalIncidents
+    //globalStats is array with attributes and ITEMS
 
     wrapper.className = this.config.tableClass || 'covidAmpel'
 
-    let tableRow = document.createElement("tr");
-    let incidentStateColora = document.createElement("td");
-    let incidentCityName = document.createElement("td");
-    let incidentUpdateDate = document.createElement("td");
-    let incident7DayNumber = document.createElement("td");
-    let incidentStateColorb = document.createElement("td");
+    for (let i = 0; i < globalStats.length; i++) {
+      const element = globalStats[i].attributes;
 
-    incidentCityName.innerHTML = globalStats.GEN;
-    incidentCityName.className = this.config.infoRowClass
 
-    incidentUpdateDate.innerHTML = globalStats.last_update;
-    incidentUpdateDate.className = this.config.infoRowClass
 
-    incident7DayNumber.className = this.config.infoRowClass
-    incident7DayNumber.innerHTML = (Math.round(globalStats.cases7_per_100k * 100) / 100).toFixed(2);
+      let tableRow = document.createElement("tr");
+      let incidentStateColora = document.createElement("td");
+      let incidentCityName = document.createElement("td");
+      let incidentUpdateDate = document.createElement("td");
+      let incident7DayNumber = document.createElement("td");
+      let incidentStateColorb = document.createElement("td");
 
-    incidentStateColora.innerHTML = "__";
-    incidentStateColorb.innerHTML = "__";
-    
-    if (parseFloat(globalStats.cases7_per_100k) <= 35) {
-      incidentStateColora.className = incidentStateColorb.className = "green"
+      incidentCityName.innerHTML = element.GEN;
+      incidentCityName.className = this.config.infoRowClass
+
+      incidentUpdateDate.innerHTML = element.last_update;
+      incidentUpdateDate.className = this.config.infoRowClass
+
+      incident7DayNumber.className = this.config.infoRowClass
+      incident7DayNumber.innerHTML = (Math.round(element.cases7_per_100k * 100) / 100).toFixed(2);
+
+      incidentStateColora.innerHTML = "__";
+      incidentStateColorb.innerHTML = "__";
+
+      if (parseFloat(element.cases7_per_100k) <= 35) {
+        incidentStateColora.className = incidentStateColorb.className = "green"
+      }
+      if (parseFloat(element.cases7_per_100k) > 35) {
+        incidentStateColora.className = incidentStateColorb.className = "yellow"
+      }
+      if (parseFloat(element.cases7_per_100k) > 50) {
+        incidentStateColora.className = incidentStateColorb.className = "red"
+      }
+      if (parseFloat(element.cases7_per_100k) > 100) {
+        incidentStateColora.className = incidentStateColorb.className = "darkred"
+      }
+
+      tableRow.appendChild(incidentStateColora)
+      tableRow.appendChild(incidentCityName)
+      tableRow.appendChild(incidentUpdateDate)
+      tableRow.appendChild(incident7DayNumber)
+      tableRow.appendChild(incidentStateColorb)
+
+      wrapper.appendChild(tableRow)
     }
-    if (parseFloat(globalStats.cases7_per_100k) > 35) {
-      incidentStateColora.className = incidentStateColorb.className  = "yellow"
-    }
-    if (parseFloat(globalStats.cases7_per_100k) > 50) {
-      incidentStateColora.className = incidentStateColorb.className = "red"
-    }
-    if (parseFloat(globalStats.cases7_per_100k) > 100) {
-      incidentStateColora.className = incidentStateColorb.className  = "darkred"
-    }
-
-    tableRow.appendChild(incidentStateColora)
-    tableRow.appendChild(incidentCityName)
-    tableRow.appendChild(incidentUpdateDate)
-    tableRow.appendChild(incident7DayNumber)
-    tableRow.appendChild(incidentStateColorb)
-
-    wrapper.appendChild(tableRow)
-
     return wrapper
   },
 })

@@ -32,7 +32,7 @@ The following properties can be configured:
 | Option                       | Description
 | ---------------------------- | -----------
 | `header`                     | The header text <br><br> **Default value:** `'COVID-19 Inzidenzwert'`
-| `cityID`                     | The ObjectID of the GEN City from this database: `'https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data'` <br><br> **Possible values:** `'224'` for München <br> **Default value:** `'224'`
+| `cityID`                     | The ObjectID of the GEN City from this database in an array: `'https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data'` <br><br> **Possible values:** Array: `["224" , "223"]` for Ingolstadt and München <br> **Default value:** `["224"]`
 | `infoRowClass`               | The font size of data <br><br> **Possible values:** `'small'`, `'medium'` <br> **Default value:** `'small'`
 | `updateInterval`             | How often does the content needs to be fetched? (Milliseconds) <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `3600000` (60 minutes)
 | `fadeSpeed`                  | Fading speed when module is updating. No need to change it... <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `4000`
@@ -52,6 +52,10 @@ The following properties can be configured:
 	}
 },
 ````
+## Updating to Version 0.2
+Attention, the format of the City ID has changed. This must also be reflected in your config.js. It needs now to be an array to support multiple cities. Change `"223"` to `["223"]` to  make it work.
+The order on the mirror is the same as in the config file array.
+
 
 ## Updating
 
@@ -60,5 +64,6 @@ To update the module to the latest version, use your terminal to go to your MMM-
 ````
 git pull
 ```` 
+
 
 Feel free to open any Issue :smiley:
