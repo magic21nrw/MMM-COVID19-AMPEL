@@ -34,6 +34,8 @@ The following properties can be configured:
 | `header`                     | The header text <br><br> **Default value:** `'COVID-19 Inzidenzwert'`
 | `cityID`                     | The ObjectID of the GEN City from this database in an array: `'https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data'` <br><br> **Possible values:** Array: `["224" , "223"]` for Ingolstadt and München <br> **Default value:** `["224"]`
 | `infoRowClass`               | The font size of data <br><br> **Possible values:** `'small'`, `'medium'` <br> **Default value:** `'small'`
+| `showUpdateDateInHeader`     | Show date of Update in Header (of last received item) <br><br> **Possible bool values:** `'true'`, `'false'` <br> **Default value:** `'true'`
+| `showUpdateDateInRow`               | The font size of data <br><br> **Possible bool values:** `'true'`, `'false'` <br> **Default value:** `'false'`
 | `updateInterval`             | How often does the content needs to be fetched? (Milliseconds) <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `3600000` (60 minutes)
 | `fadeSpeed`                  | Fading speed when module is updating. No need to change it... <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `4000`
 
@@ -47,6 +49,8 @@ The following properties can be configured:
     header: 'COVID-19 Inzidenzwert', // Header Title of Display on MagicMirror
     cityID: ["224","223"] // City ID from  https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data
     infoRowClass: "small", // small, medium
+    showUpdateDateInHeader: true, //Show update date in header
+    showUpdateDateInRow: false, //Show update date in each row
     updateInterval: 3600000, // update interval in milliseconds // 1 Hour - Values are only refreshed every 24 H on Server
     fadeSpeed: 4000
 	}

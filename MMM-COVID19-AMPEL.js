@@ -12,8 +12,11 @@ Module.register("MMM-COVID19-AMPEL", {
     header: 'COVID-19 Inzidenzwert',
     cityID: ["224"], // City ID from  https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data
     infoRowClass: "small", // small, medium
+    showUpdateDateInHeader: true,
+    showUpdateDateInRow: false,
     updateInterval: 3600000, // update interval in milliseconds
-    fadeSpeed: 4000
+    fadeSpeed: 4000,
+    updateDate: "no update received yet"
   },
 
   getStyles: function () {
@@ -49,7 +52,9 @@ Module.register("MMM-COVID19-AMPEL", {
   },
 
   getHeader: function () {
-    return this.config.header
+    var headerTitle = this.config.header
+    if (this.config.showUpdateDateInHeader) headerTitle +=  " - " + this.config.updateDate;
+    return headerTitle
   },
 
   getDom: function () {
@@ -61,7 +66,7 @@ Module.register("MMM-COVID19-AMPEL", {
     //globalStats is array with attributes and ITEMS
 
     wrapper.className = this.config.tableClass || 'covidAmpel'
-
+    
     for (let i = 0; i < globalStats.length; i++) {
       const element = globalStats[i].attributes;
 
@@ -77,9 +82,11 @@ Module.register("MMM-COVID19-AMPEL", {
       incidentCityName.innerHTML = element.GEN;
       incidentCityName.className = this.config.infoRowClass
 
-      incidentUpdateDate.innerHTML = element.last_update;
-      incidentUpdateDate.className = this.config.infoRowClass
-
+      this.config.updateDate = element.last_update;
+      if (this.config.showUpdateDateInRow) {
+        incidentUpdateDate.innerHTML = element.last_update;
+        incidentUpdateDate.className = this.config.infoRowClass
+      }
       incident7DayNumber.className = this.config.infoRowClass
       incident7DayNumber.innerHTML = (Math.round(element.cases7_per_100k * 100) / 100).toFixed(2);
 
@@ -101,7 +108,7 @@ Module.register("MMM-COVID19-AMPEL", {
 
       tableRow.appendChild(incidentStateColora)
       tableRow.appendChild(incidentCityName)
-      tableRow.appendChild(incidentUpdateDate)
+      if (this.config.showUpdateDateInRow) { tableRow.appendChild(incidentUpdateDate) }
       tableRow.appendChild(incident7DayNumber)
       tableRow.appendChild(incidentStateColorb)
 
