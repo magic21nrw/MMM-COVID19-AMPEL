@@ -47,7 +47,7 @@ The following properties can be configured:
   position: 'top_center',
   config:	{
     header: 'COVID-19 Inzidenzwert', // Header Title of Display on MagicMirror
-    cityID: ["224","223"] // City ID from  https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data
+    cityID: ["224","223"], // City ID from  https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data
     infoRowClass: "small", // small, medium
     showUpdateDateInHeader: true, //Show update date in header
     showUpdateDateInRow: false, //Show update date in each row
