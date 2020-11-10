@@ -37,6 +37,10 @@ The following properties can be configured:
 | `showUpdateDateInHeader`     | Show date of update in Header (of last received item) <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showUpdateDateInRow`        | Show date of update in each row  <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `false`
 | `updateInterval`             | How often does the content needs to be fetched? (Milliseconds) <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `3600000` (60 minutes)
+| `showTitle`                  | Show a title over each column of information provided if you want to show more than one information.<br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
+| `showCases`                  | Show total number of people infected <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
+| `showCasesPerPeople`         | Show % of cases per people in this city/region  <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
+| `showDeathRatePerPeople`     | Show death rate of people <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `fadeSpeed`                  | Fading speed when module is updating. No need to change it... <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `4000`
 
 ## Config Example
@@ -51,6 +55,10 @@ The following properties can be configured:
     infoRowClass: "small", // small, medium
     showUpdateDateInHeader: true, //Show update date in header
     showUpdateDateInRow: false, //Show update date in each row
+    showTitle: true, //Show Title row with headlines if you want to display more than one information
+    showCases: true, //Show amount of active cases in city
+    showCasesPerPeople: true, //Show Percentage of active cases per inhabitant
+    showDeathRatePerPeople: true, //show death rate in % of infected people
     updateInterval: 3600000, // update interval in milliseconds // 1 Hour - Values are only refreshed every 24 H on Server
     fadeSpeed: 4000
 	}

@@ -14,6 +14,10 @@ Module.register("MMM-COVID19-AMPEL", {
     infoRowClass: "small", // small, medium
     showUpdateDateInHeader: true,
     showUpdateDateInRow: false,
+    showTitle: true,
+    showCases: true,
+    showCasesPerPeople: true,
+    showDeathRatePerPeople: true,
     updateInterval: 3600000, // update interval in milliseconds
     fadeSpeed: 4000,
     updateDate: "no update received yet"
@@ -67,6 +71,50 @@ Module.register("MMM-COVID19-AMPEL", {
 
     wrapper.className = this.config.tableClass || 'covidAmpel'
     
+    if (this.config.showTitle) {
+      let tableRow = document.createElement("tr");
+      let incidentStateColora = document.createElement("td");
+      let incidentCityName = document.createElement("td");
+      let incidentUpdateDate = document.createElement("td");
+      let totalCases = document.createElement("td");
+      let casesPerCapita = document.createElement("td");
+      let deathPerInfection = document.createElement("td");
+      let incident7DayNumber = document.createElement("td");
+      let incidentStateColorb = document.createElement("td");
+
+      incidentCityName.innerHTML = "Location";
+      incidentCityName.className = this.config.infoRowClass
+      if (this.config.showUpdateDateInRow) {
+      incidentUpdateDate.innerHTML = "Updated on";
+      incidentUpdateDate.className = this.config.infoRowClass 
+    }
+    if (this.config.showCases) {
+      totalCases.innerHTML = "Infections";
+      totalCases.className = this.config.infoRowClass 
+    }
+    if (this.config.showCasesPerPeople) {
+      casesPerCapita.innerHTML = "Infection rate %";
+      casesPerCapita.className = this.config.infoRowClass 
+    }
+    if (this.config.showDeathRatePerPeople) {
+      deathPerInfection.innerHTML = "Death rate %";
+      deathPerInfection.className = this.config.infoRowClass 
+    }
+      incident7DayNumber.innerHTML = "Incidence Value";
+      incident7DayNumber.className = this.config.infoRowClass
+
+      tableRow.appendChild(incidentStateColora)
+      tableRow.appendChild(incidentCityName)
+      if (this.config.showUpdateDateInRow) { tableRow.appendChild(incidentUpdateDate) }
+      if (this.config.showCases) { tableRow.appendChild(totalCases) }
+      if (this.config.showCasesPerPeople) { tableRow.appendChild(casesPerCapita) }
+      if (this.config.showDeathRatePerPeople) { tableRow.appendChild(deathPerInfection) }
+      tableRow.appendChild(incident7DayNumber)
+      tableRow.appendChild(incidentStateColorb)
+
+      wrapper.appendChild(tableRow)
+    }
+
     for (let i = 0; i < globalStats.length; i++) {
       const element = globalStats[i].attributes;
 
@@ -76,6 +124,9 @@ Module.register("MMM-COVID19-AMPEL", {
       let incidentStateColora = document.createElement("td");
       let incidentCityName = document.createElement("td");
       let incidentUpdateDate = document.createElement("td");
+      let totalCases = document.createElement("td");
+      let casesPerCapita = document.createElement("td");
+      let deathPerInfection = document.createElement("td");
       let incident7DayNumber = document.createElement("td");
       let incidentStateColorb = document.createElement("td");
 
@@ -86,6 +137,19 @@ Module.register("MMM-COVID19-AMPEL", {
       if (this.config.showUpdateDateInRow) {
         incidentUpdateDate.innerHTML = element.last_update;
         incidentUpdateDate.className = this.config.infoRowClass
+      }
+      if (this.config.showCases) {
+        var cs = element.cases;
+        totalCases.innerHTML =  cs.toLocaleString();
+        totalCases.className = this.config.infoRowClass
+      }
+      if (this.config.showCasesPerPeople) {
+        casesPerCapita.innerHTML = element.cases_per_population.toFixed(2) + '%';
+        casesPerCapita.className = this.config.infoRowClass
+      }
+      if (this.config.showDeathRatePerPeople) {
+        deathPerInfection.innerHTML = element.death_rate.toFixed(2) + '%';
+        deathPerInfection.className = this.config.infoRowClass
       }
       incident7DayNumber.className = this.config.infoRowClass
       incident7DayNumber.innerHTML = (Math.round(element.cases7_per_100k * 100) / 100).toFixed(2);
@@ -109,6 +173,9 @@ Module.register("MMM-COVID19-AMPEL", {
       tableRow.appendChild(incidentStateColora)
       tableRow.appendChild(incidentCityName)
       if (this.config.showUpdateDateInRow) { tableRow.appendChild(incidentUpdateDate) }
+      if (this.config.showCases) { tableRow.appendChild(totalCases) }
+      if (this.config.showCasesPerPeople) { tableRow.appendChild(casesPerCapita) }
+      if (this.config.showDeathRatePerPeople) { tableRow.appendChild(deathPerInfection) }
       tableRow.appendChild(incident7DayNumber)
       tableRow.appendChild(incidentStateColorb)
 
