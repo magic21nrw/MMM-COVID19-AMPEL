@@ -36,11 +36,14 @@ The following properties can be configured:
 | `infoRowClass`               | The font size of data <br><br> **Possible values:** `'small'`, `'medium'` <br> **Default value:** `'small'`
 | `showUpdateDateInHeader`     | Show date of update in Header (of last received item) <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showUpdateDateInRow`        | Show date of update in each row  <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `false`
+| `showStatusLightLeft`        | Show status light on left side according to incidence value<br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
+| `showStatusLightRight`       | Show status light on right side according to incidence value <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `false`
 | `updateInterval`             | How often does the content needs to be fetched? (Milliseconds) <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `3600000` (60 minutes)
 | `showTitle`                  | Show a title over each column of information provided if you want to show more than one information.<br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showCases`                  | Show total number of people infected <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showCasesPerPeople`         | Show % of cases per people in this city/region  <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showDeathRatePerPeople`     | Show death rate of people <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
+| `show7DayIncidence`          | Show 7 day incidence value which corresponds to the status light <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `fadeSpeed`                  | Fading speed when module is updating. No need to change it... <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `4000`
 
 ## Config Example
@@ -55,19 +58,18 @@ The following properties can be configured:
     infoRowClass: "small", // small, medium
     showUpdateDateInHeader: true, //Show update date in header
     showUpdateDateInRow: false, //Show update date in each row
+    showStatusLightLeft: true, //Show left status light
+    showStatusLightRight: true, // Show right status light
     showTitle: true, //Show Title row with headlines if you want to display more than one information
     showCases: true, //Show amount of active cases in city
     showCasesPerPeople: true, //Show Percentage of active cases per inhabitant
     showDeathRatePerPeople: true, //show death rate in % of infected people
+    show7DayIncidence: true, // Show 7 day incidence value for your location
     updateInterval: 3600000, // update interval in milliseconds // 1 Hour - Values are only refreshed every 24 H on Server
     fadeSpeed: 4000
 	}
 },
 ````
-## Updating to Version 0.2
-Attention, the format of the City ID has changed. This must also be reflected in your config.js. It needs now to be an array to support multiple cities. Change `"223"` to `["223"]` to  make it work.
-The order on the mirror is the same as in the config file array.
-
 
 ## Updating
 
