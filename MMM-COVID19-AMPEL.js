@@ -21,6 +21,7 @@ Module.register("MMM-COVID19-AMPEL", {
     showCasesPerPeople: true,
     showDeathRatePerPeople: true,
     show7DayIncidence: true,
+    numberOfDigits: 2,
     updateInterval: 3600000, // update interval in milliseconds
     fadeSpeed: 4000,
     updateDate: "no update received yet",
@@ -28,6 +29,13 @@ Module.register("MMM-COVID19-AMPEL", {
 
   getStyles: function () {
     return ["MMM-COVID19-AMPEL.css"];
+  },
+
+  getTranslations: function() {
+    return {
+      en: "translations/en.json",
+      de: "translations/de.json"
+	}
   },
 
   start: function () {
@@ -87,22 +95,22 @@ Module.register("MMM-COVID19-AMPEL", {
       let incident7DayNumber = document.createElement("td");
       let incidentStateColorb = document.createElement("td");
 
-      incidentCityName.innerHTML = "Location";
+      incidentCityName.innerHTML = this.translate('Location');
       incidentCityName.className = this.config.infoRowClass;
 
-      incidentUpdateDate.innerHTML = "Updated on";
+      incidentUpdateDate.innerHTML = this.translate('Updated on');
       incidentUpdateDate.className = this.config.infoRowClass;
 
-      totalCases.innerHTML = "Infections";
+      totalCases.innerHTML = this.translate('Infections');
       totalCases.className = this.config.infoRowClass;
 
-      casesPerCapita.innerHTML = "Infection rate %";
+      casesPerCapita.innerHTML = this.translate('Infection rate %');
       casesPerCapita.className = this.config.infoRowClass;
 
-      deathPerInfection.innerHTML = "Death rate %";
+      deathPerInfection.innerHTML = this.translate('Death rate %');
       deathPerInfection.className = this.config.infoRowClass;
 
-      incident7DayNumber.innerHTML = "Incidence value";
+      incident7DayNumber.innerHTML = this.translate('Incidence value');
       incident7DayNumber.className = this.config.infoRowClass;
 
       if (this.config.showStatusLightLeft) {
@@ -159,18 +167,18 @@ Module.register("MMM-COVID19-AMPEL", {
       }
       if (this.config.showCasesPerPeople) {
         casesPerCapita.innerHTML =
-          element.cases_per_population.toFixed(2) + "%";
+          element.cases_per_population.toFixed(this.config.numberOfDigits) + "%";
         casesPerCapita.className = this.config.infoRowClass;
       }
       if (this.config.showDeathRatePerPeople) {
-        deathPerInfection.innerHTML = element.death_rate.toFixed(2) + "%";
+        deathPerInfection.innerHTML = element.death_rate.toFixed(this.config.numberOfDigits) + "%";
         deathPerInfection.className = this.config.infoRowClass;
       }
       if (this.config.show7DayIncidence) {
         incident7DayNumber.className = this.config.infoRowClass;
         incident7DayNumber.innerHTML = (
           Math.round(element.cases7_per_100k * 100) / 100
-        ).toFixed(2);
+        ).toFixed(this.config.numberOfDigits);
       }
       incidentStateColora.innerHTML = "__";
       incidentStateColorb.innerHTML = "__";
