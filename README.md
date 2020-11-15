@@ -66,7 +66,7 @@ The following properties can be configured:
     showCasesPerPeople: true, //Show Percentage of active cases per inhabitant
     showDeathRatePerPeople: true, //show death rate in % of infected people
     show7DayIncidence: true, // Show 7 day incidence value for your location
-    numberOfDigits: 2 //Round the Percentage and incidence value to number of digits
+    numberOfDigits: 2, //Round the Percentage and incidence value to number of digits
     updateInterval: 3600000, // update interval in milliseconds // 1 Hour - Values are only refreshed every 24 H on Server
     fadeSpeed: 4000
 	}
