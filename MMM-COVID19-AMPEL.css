@@ -12,6 +12,10 @@
   align-content: center;
 }
 
+.covidAmpel .purple {
+  background-color: #5000ac;
+  color: #5000ac;
+}
 .covidAmpel .darkred {
   background-color: #640000;
   color: #640000;

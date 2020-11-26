@@ -1,5 +1,5 @@
 # MMM-COVID19-AMPEL
-A [MagicMirror²](https://magicmirror.builders) helper module to display the COVID 19 INCIDENCE Value in form of the four stages in Germany (Green, Yellow, Red and Dark - Red).
+A [MagicMirror²](https://magicmirror.builders) helper module to display the COVID 19 INCIDENCE Value in form of the five stages in Germany (Green, Yellow, Red and Dark - Red and Purple).
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/magic21nrw/MMM-COVID19-AMPEL/master/LICENSE)
 

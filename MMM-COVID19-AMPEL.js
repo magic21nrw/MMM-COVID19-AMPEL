@@ -183,19 +183,23 @@ Module.register("MMM-COVID19-AMPEL", {
       incidentStateColora.innerHTML = "__";
       incidentStateColorb.innerHTML = "__";
 
-      if (parseFloat(element.cases7_per_100k) <= 35) {
+      if (parseFloat(element.cases7_per_100k) < 35) {
         incidentStateColora.className = incidentStateColorb.className = "green";
       }
-      if (parseFloat(element.cases7_per_100k) > 35) {
+      if (parseFloat(element.cases7_per_100k) >= 35) {
         incidentStateColora.className = incidentStateColorb.className =
           "yellow";
       }
-      if (parseFloat(element.cases7_per_100k) > 50) {
+      if (parseFloat(element.cases7_per_100k) >= 50) {
         incidentStateColora.className = incidentStateColorb.className = "red";
       }
-      if (parseFloat(element.cases7_per_100k) > 100) {
+      if (parseFloat(element.cases7_per_100k) >= 100) {
         incidentStateColora.className = incidentStateColorb.className =
           "darkred";
+      }
+      if (parseFloat(element.cases7_per_100k) >= 200) {
+        incidentStateColora.className = incidentStateColorb.className =
+          "purple";
       }
       if (this.config.showStatusLightLeft) {
         tableRow.appendChild(incidentStateColora);
