@@ -15,20 +15,25 @@
 .covidAmpel .purple {
   background-color: #5000ac;
   color: #5000ac;
+  line-height: 0px;
 }
 .covidAmpel .darkred {
   background-color: #640000;
   color: #640000;
+  line-height: 0px;
 }
 .covidAmpel .red {
   background-color: #FF0000;
   color: #FF0000;
+  line-height: 0px;
 }
 .covidAmpel .yellow {
   background-color: #FFFF00;
   color: #FFFF00;
+  line-height: 0px;
 }
 .covidAmpel .green {
   background-color: #00ff00;
   color: #00ff00;
+  line-height: 0px;
 }
