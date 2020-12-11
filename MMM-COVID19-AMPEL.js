@@ -34,7 +34,10 @@ Module.register("MMM-COVID19-AMPEL", {
   getTranslations: function() {
     return {
       en: "translations/en.json",
-      de: "translations/de.json"
+      de: "translations/de.json",
+      it: "translations/it.json",
+      fr: "translations/fr.json",
+      es: "translations/es.json"
 	}
   },
 
