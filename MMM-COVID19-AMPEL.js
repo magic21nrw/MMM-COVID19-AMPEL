@@ -21,6 +21,7 @@ Module.register("MMM-COVID19-AMPEL", {
     showCasesPerPeople: true,
     showDeathRatePerPeople: true,
     show7DayIncidence: true,
+    landModeOnly: false,
     numberOfDigits: 2,
     updateInterval: 3600000, // update interval in milliseconds
     fadeSpeed: 4000,
@@ -91,6 +92,7 @@ Module.register("MMM-COVID19-AMPEL", {
       let tableRow = document.createElement("tr");
       let incidentStateColora = document.createElement("td");
       let incidentCityName = document.createElement("td");
+      let incidentBLName = document.createElement("td");
       let incidentUpdateDate = document.createElement("td");
       let totalCases = document.createElement("td");
       let casesPerCapita = document.createElement("td");
@@ -100,6 +102,9 @@ Module.register("MMM-COVID19-AMPEL", {
 
       incidentCityName.innerHTML = this.translate('Location');
       incidentCityName.className = this.config.infoRowClass;
+
+      incidentBLName.innerHTML = this.translate('Land');
+      incidentBLName.className = this.config.infoRowClass;
 
       incidentUpdateDate.innerHTML = this.translate('Updated on');
       incidentUpdateDate.className = this.config.infoRowClass;
@@ -119,17 +124,19 @@ Module.register("MMM-COVID19-AMPEL", {
       if (this.config.showStatusLightLeft) {
         tableRow.appendChild(incidentStateColora);
       }
-      tableRow.appendChild(incidentCityName);
+      if (!this.config.landModeOnly) tableRow.appendChild(incidentCityName);
+      if (this.config.landModeOnly) tableRow.appendChild(incidentBLName);
+      
       if (this.config.showUpdateDateInRow) {
         tableRow.appendChild(incidentUpdateDate);
       }
-      if (this.config.showCases) {
+      if (this.config.showCases && !this.config.landModeOnly) {
         tableRow.appendChild(totalCases);
       }
-      if (this.config.showCasesPerPeople) {
+      if (this.config.showCasesPerPeople && !this.config.landModeOnly) {
         tableRow.appendChild(casesPerCapita);
       }
-      if (this.config.showDeathRatePerPeople) {
+      if (this.config.showDeathRatePerPeople && !this.config.landModeOnly) {
         tableRow.appendChild(deathPerInfection);
       }
       if (this.config.show7DayIncidence) {
@@ -148,6 +155,7 @@ Module.register("MMM-COVID19-AMPEL", {
       let tableRow = document.createElement("tr");
       let incidentStateColora = document.createElement("td");
       let incidentCityName = document.createElement("td");
+      let incidentBLName = document.createElement("td");
       let incidentUpdateDate = document.createElement("td");
       let totalCases = document.createElement("td");
       let casesPerCapita = document.createElement("td");
@@ -157,35 +165,43 @@ Module.register("MMM-COVID19-AMPEL", {
 
       incidentCityName.innerHTML = element.GEN;
       incidentCityName.className = this.config.infoRowClass;
+      incidentBLName.innerHTML = element.BL;
+      incidentBLName.className = this.config.infoRowClass;
 
       this.config.updateDate = element.last_update;
       if (this.config.showUpdateDateInRow) {
         incidentUpdateDate.innerHTML = element.last_update;
         incidentUpdateDate.className = this.config.infoRowClass;
       }
-      if (this.config.showCases) {
+      if (this.config.showCases && !this.config.landModeOnly) {
         var cs = element.cases;
         totalCases.innerHTML = cs.toLocaleString();
         totalCases.className = this.config.infoRowClass;
       }
-      if (this.config.showCasesPerPeople) {
+      if (this.config.showCasesPerPeople && !this.config.landModeOnly) {
         casesPerCapita.innerHTML =
           element.cases_per_population.toFixed(this.config.numberOfDigits) + "%";
         casesPerCapita.className = this.config.infoRowClass;
       }
-      if (this.config.showDeathRatePerPeople) {
+      if (this.config.showDeathRatePerPeople && !this.config.landModeOnly) {
         deathPerInfection.innerHTML = element.death_rate.toFixed(this.config.numberOfDigits) + "%";
         deathPerInfection.className = this.config.infoRowClass;
       }
-      if (this.config.show7DayIncidence) {
+      if (this.config.show7DayIncidence && !this.config.landModeOnly) {
         incident7DayNumber.className = this.config.infoRowClass;
         incident7DayNumber.innerHTML = (
           Math.round(element.cases7_per_100k * 100) / 100
         ).toFixed(this.config.numberOfDigits);
       }
+      if (this.config.show7DayIncidence && this.config.landModeOnly) {
+        incident7DayNumber.className = this.config.infoRowClass;
+        incident7DayNumber.innerHTML = (
+          Math.round(element.cases7_bl_per_100k * 100) / 100
+        ).toFixed(this.config.numberOfDigits);
+      }
       incidentStateColora.innerHTML = "__";
       incidentStateColorb.innerHTML = "__";
-
+      
       if (parseFloat(element.cases7_per_100k) < 35) {
         incidentStateColora.className = incidentStateColorb.className = "green";
       }
@@ -204,23 +220,49 @@ Module.register("MMM-COVID19-AMPEL", {
         incidentStateColora.className = incidentStateColorb.className =
           "purple";
       }
+      if (this.config.landModeOnly) {
+        if (parseFloat(element.cases7_bl_per_100k) < 35) {
+          incidentStateColora.className = incidentStateColorb.className = "green";
+        }
+        if (parseFloat(element.cases7_bl_per_100k) >= 35) {
+          incidentStateColora.className = incidentStateColorb.className =
+            "yellow";
+        }
+        if (parseFloat(element.cases7_bl_per_100k) >= 50) {
+          incidentStateColora.className = incidentStateColorb.className = "red";
+        }
+        if (parseFloat(element.cases7_bl_per_100k) >= 100) {
+          incidentStateColora.className = incidentStateColorb.className =
+            "darkred";
+        }
+        if (parseFloat(element.cases7_bl_per_100k) >= 200) {
+          incidentStateColora.className = incidentStateColorb.className =
+            "purple";
+        } 
+      }
       if (this.config.showStatusLightLeft) {
         tableRow.appendChild(incidentStateColora);
       }
-      tableRow.appendChild(incidentCityName);
+      
+      if (!this.config.landModeOnly) tableRow.appendChild(incidentCityName);
+      if (this.config.landModeOnly) tableRow.appendChild(incidentBLName);
+
       if (this.config.showUpdateDateInRow) {
         tableRow.appendChild(incidentUpdateDate);
       }
-      if (this.config.showCases) {
+      if (this.config.showCases && !this.config.landModeOnly) {
         tableRow.appendChild(totalCases);
       }
-      if (this.config.showCasesPerPeople) {
+      if (this.config.showCasesPerPeople && !this.config.landModeOnly) {
         tableRow.appendChild(casesPerCapita);
       }
-      if (this.config.showDeathRatePerPeople) {
+      if (this.config.showDeathRatePerPeople && !this.config.landModeOnly) {
         tableRow.appendChild(deathPerInfection);
       }
-      if (this.config.show7DayIncidence) {
+      if (this.config.show7DayIncidence && !this.config.landModeOnly) {
+        tableRow.appendChild(incident7DayNumber);
+      }
+      if (this.config.show7DayIncidence && this.config.landModeOnly) {
         tableRow.appendChild(incident7DayNumber);
       }
       if (this.config.showStatusLightRight) {

@@ -45,6 +45,7 @@ The following properties can be configured:
 | `showDeathRatePerPeople`     | Show death rate of people <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `show7DayIncidence`          | Show 7 day incidence value which corresponds to the status light <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `numberOfDigits`             | Number of digits for percentage values to show.<br><br> **Possible int values:** `0`, `1` or `2` <br> **Default value:** `2`
+| `landModeOnly`               | Shows only values for the Bundesland instead of the selected region. <br> Example: If City Munich is selected and landModeOnly is true, Bayern will be displayed instead of Munich.<br><br> **Default value:** `false`
 | `fadeSpeed`                  | Fading speed when module is updating. No need to change it... <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `4000`
 
 ## Config Example
@@ -66,6 +67,7 @@ The following properties can be configured:
     showCasesPerPeople: true, //Show Percentage of active cases per inhabitant
     showDeathRatePerPeople: true, //show death rate in % of infected people
     show7DayIncidence: true, // Show 7 day incidence value for your location
+    landModeOnly: false, // Shows Bundesland instead of City in Bundesland (Thos who want to display only the Bundesland)
     numberOfDigits: 2, //Round the Percentage and incidence value to number of digits
     updateInterval: 3600000, // update interval in milliseconds // 1 Hour - Values are only refreshed every 24 H on Server
     fadeSpeed: 4000
