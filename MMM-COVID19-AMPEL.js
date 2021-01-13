@@ -148,6 +148,8 @@ Module.register("MMM-COVID19-AMPEL", {
 
       wrapper.appendChild(tableRow);
     }
+    
+    globalStats.sort((a, b) => (a.attributes.GEN > b.attributes.GEN) ? 1 : -1)
 
     for (let i = 0; i < globalStats.length; i++) {
       const element = globalStats[i].attributes;
