@@ -15,6 +15,7 @@ Module.register("MMM-COVID19-AMPEL", {
     showUpdateDateInHeader: true,
     showUpdateDateInRow: false,
     showTitle: true,
+    showSKLK: true,
     showStatusLightLeft: true,
     showStatusLightRight: true,
     showCases: true,
@@ -32,14 +33,14 @@ Module.register("MMM-COVID19-AMPEL", {
     return ["MMM-COVID19-AMPEL.css"];
   },
 
-  getTranslations: function() {
+  getTranslations: function () {
     return {
       en: "translations/en.json",
       de: "translations/de.json",
       it: "translations/it.json",
       fr: "translations/fr.json",
       es: "translations/es.json"
-	}
+    }
   },
 
   start: function () {
@@ -92,6 +93,7 @@ Module.register("MMM-COVID19-AMPEL", {
       let tableRow = document.createElement("tr");
       let incidentStateColora = document.createElement("td");
       let incidentCityName = document.createElement("td");
+      let incidentSKLK = document.createElement("td");
       let incidentBLName = document.createElement("td");
       let incidentUpdateDate = document.createElement("td");
       let totalCases = document.createElement("td");
@@ -102,6 +104,9 @@ Module.register("MMM-COVID19-AMPEL", {
 
       incidentCityName.innerHTML = this.translate('Location');
       incidentCityName.className = this.config.infoRowClass;
+
+      incidentSKLK.innerHTML = this.translate('Region');
+      incidentSKLK.className = this.config.infoRowClass;
 
       incidentBLName.innerHTML = this.translate('Land');
       incidentBLName.className = this.config.infoRowClass;
@@ -124,9 +129,12 @@ Module.register("MMM-COVID19-AMPEL", {
       if (this.config.showStatusLightLeft) {
         tableRow.appendChild(incidentStateColora);
       }
-      if (!this.config.landModeOnly) tableRow.appendChild(incidentCityName);
+      if (!this.config.landModeOnly) {
+        tableRow.appendChild(incidentCityName);
+        if (this.config.showSKLK) tableRow.appendChild(incidentSKLK);
+      }
       if (this.config.landModeOnly) tableRow.appendChild(incidentBLName);
-      
+
       if (this.config.showUpdateDateInRow) {
         tableRow.appendChild(incidentUpdateDate);
       }
@@ -148,7 +156,7 @@ Module.register("MMM-COVID19-AMPEL", {
 
       wrapper.appendChild(tableRow);
     }
-    
+
     globalStats.sort((a, b) => (a.attributes.GEN > b.attributes.GEN) ? 1 : -1)
 
     for (let i = 0; i < globalStats.length; i++) {
@@ -157,6 +165,7 @@ Module.register("MMM-COVID19-AMPEL", {
       let tableRow = document.createElement("tr");
       let incidentStateColora = document.createElement("td");
       let incidentCityName = document.createElement("td");
+      let incidentSKLK = document.createElement("td");
       let incidentBLName = document.createElement("td");
       let incidentUpdateDate = document.createElement("td");
       let totalCases = document.createElement("td");
@@ -167,6 +176,8 @@ Module.register("MMM-COVID19-AMPEL", {
 
       incidentCityName.innerHTML = element.GEN;
       incidentCityName.className = this.config.infoRowClass;
+      incidentSKLK.innerHTML = element.BEZ;
+      incidentSKLK.className = this.config.infoRowClass;
       incidentBLName.innerHTML = element.BL;
       incidentBLName.className = this.config.infoRowClass;
 
@@ -203,7 +214,7 @@ Module.register("MMM-COVID19-AMPEL", {
       }
       incidentStateColora.innerHTML = "__";
       incidentStateColorb.innerHTML = "__";
-      
+
       if (parseFloat(element.cases7_per_100k) < 35) {
         incidentStateColora.className = incidentStateColorb.className = "green";
       }
@@ -240,13 +251,16 @@ Module.register("MMM-COVID19-AMPEL", {
         if (parseFloat(element.cases7_bl_per_100k) >= 200) {
           incidentStateColora.className = incidentStateColorb.className =
             "purple";
-        } 
+        }
       }
       if (this.config.showStatusLightLeft) {
         tableRow.appendChild(incidentStateColora);
       }
-      
-      if (!this.config.landModeOnly) tableRow.appendChild(incidentCityName);
+
+      if (!this.config.landModeOnly) {
+        tableRow.appendChild(incidentCityName);
+        if (this.config.showSKLK) tableRow.appendChild(incidentSKLK)
+      }
       if (this.config.landModeOnly) tableRow.appendChild(incidentBLName);
 
       if (this.config.showUpdateDateInRow) {

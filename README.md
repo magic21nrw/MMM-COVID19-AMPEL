@@ -40,6 +40,7 @@ The following properties can be configured:
 | `showStatusLightRight`       | Show status light on right side according to incidence value <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `false`
 | `updateInterval`             | How often does the content needs to be fetched? (Milliseconds) <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `3600000` (60 minutes)
 | `showTitle`                  | Show a title over each column of information provided if you want to show more than one information.<br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
+| `showSKLK`                   | Switch for displaying the additional information for the place if it is a city area or regional area (Stad or Landkreis)<br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showCases`                  | Show total number of people infected <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showCasesPerPeople`         | Show % of cases per people in this city/region  <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showDeathRatePerPeople`     | Show death rate of people <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
@@ -63,6 +64,7 @@ The following properties can be configured:
     showStatusLightLeft: true, //Show left status light
     showStatusLightRight: true, // Show right status light
     showTitle: true, //Show Title row with headlines if you want to display more than one information
+    showSKLK: true, //Show the Region information if the Pace displayed is the city or regional area (Stadt or Land) 
     showCases: true, //Show amount of active cases in city
     showCasesPerPeople: true, //Show Percentage of active cases per inhabitant
     showDeathRatePerPeople: true, //show death rate in % of infected people
