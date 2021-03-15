@@ -22,6 +22,7 @@ Module.register("MMM-COVID19-AMPEL", {
     showCasesPerPeople: true,
     showDeathRatePerPeople: true,
     show7DayIncidence: true,
+    showVaccinations: true,
     landModeOnly: false,
     numberOfDigits: 2,
     updateInterval: 3600000, // update interval in milliseconds
@@ -69,20 +70,31 @@ Module.register("MMM-COVID19-AMPEL", {
       this.globalIncidents = payload;
       this.updateDom(self.config.fadeSpeed);
     }
+    if (notification === "VACCINATIONS") {
+      this.globalVaccinations = payload;
+      var lines = this.globalVaccinations.split("\n");
+      //Last Line is empty therefore -2
+      var result = lines[lines.length-2].split("\t");
+      this.globalVaccinations = result[10]*100;
+      this.updateDom(self.config.fadeSpeed);
+    }
   },
 
   getHeader: function () {
     var headerTitle = this.config.header;
+    var vaccinationsLabel = this.translate("VacQuota");
     if (this.config.showUpdateDateInHeader)
       headerTitle += " - " + this.config.updateDate;
+    if (this.config.showVaccinations && !(this.globalVaccinations === null || this.globalVaccinations === undefined ))
+      headerTitle += " - " + vaccinationsLabel + " " + this.globalVaccinations.toFixed(this.config.numberOfDigits) + "%";
     return headerTitle;
   },
 
   getDom: function () {
     var wrapper = document.createElement("table");
-    if (this.globalIncidents === null || this.globalIncidents === undefined)
+    if (this.globalIncidents === null || this.globalIncidents === undefined )
       return wrapper;
-    if (Object.entries(this.globalIncidents).length === 0) return wrapper;
+    if (Object.entries(this.globalIncidents).length === 0 ) return wrapper;
 
     var globalStats = this.globalIncidents;
     //globalStats is array with attributes and ITEMS

@@ -6,5 +6,6 @@
     "Death rate %": "Tasa de mortalidad %",
     "Incidence value": "Valor de incidencia",
     "Land": "Land",
-    "Region": "Communidad"
+    "Region": "Communidad",
+    "VacQuota" : "Tasa de vacunación"
 }
