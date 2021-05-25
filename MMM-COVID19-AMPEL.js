@@ -30,6 +30,7 @@ Module.register("MMM-COVID19-AMPEL", {
     updateDate: "no update received yet",
   },
 
+
   getStyles: function () {
     return ["MMM-COVID19-AMPEL.css"];
   },
@@ -72,10 +73,10 @@ Module.register("MMM-COVID19-AMPEL", {
     }
     if (notification === "VACCINATIONS") {
       this.globalVaccinations = payload;
-      var lines = this.globalVaccinations.split("\n");
-      //Last Line is empty therefore -2
+      var lines = this.globalVaccinations[this.globalVaccinations.length-1].split("\n");
       var result = lines[lines.length-2].split("\t");
       this.globalVaccinations = result[10]*100;
+      this.globalSecondVaccination = result[11]*100;
       this.updateDom(self.config.fadeSpeed);
     }
   },
@@ -83,10 +84,11 @@ Module.register("MMM-COVID19-AMPEL", {
   getHeader: function () {
     var headerTitle = this.config.header;
     var vaccinationsLabel = this.translate("VacQuota");
-    if (this.config.showUpdateDateInHeader)
+    if (this.config.showUpdateDateInHeader) {
       headerTitle += " - " + this.config.updateDate;
+    }
     if (this.config.showVaccinations && !(this.globalVaccinations === null || this.globalVaccinations === undefined ))
-      headerTitle += " - " + vaccinationsLabel + " " + this.globalVaccinations.toFixed(this.config.numberOfDigits) + "%";
+      headerTitle += " - " + vaccinationsLabel + " " + this.globalVaccinations.toFixed(this.config.numberOfDigits) + "% / " + this.globalSecondVaccination.toFixed(this.config.numberOfDigits) + "%";
     return headerTitle;
   },
 

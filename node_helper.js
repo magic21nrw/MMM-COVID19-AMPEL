@@ -9,6 +9,8 @@
 
 var NodeHelper = require('node_helper')
 var request = require('request')
+var needle = require('needle');
+
 
 var incidentURLPrefix = 'https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/RKI_Landkreisdaten/FeatureServer/0/query?where=&objectIds='
 var incidentURLSuffix = '&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=OBJECTID%2CGEN%2CBEZ%2Ccases7_per_100k%2Ccases7_bl_per_100k%2CBL%2Ccases_per_population%2Ccases%2Cdeath_rate%2Clast_update&returnGeometry=false&returnCentroid=false&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=4326&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pjson&token='
@@ -51,14 +53,20 @@ var options = {
   method: 'GET',
   url: vaccinationURL,
   headers: {
+    'Cache-Control' : "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+    'Pragma' : "no-cache",
+    'Expires' : 0,
+    'Surrogate-Control' : "no-store"
   }
 }
-request(options, function (error, response, body) {
+
+//Seems like the larger file does not get read by request - using needle instead
+needle.get(vaccinationURL, { compressed: true }, function(error, response) {
   if (!error && response.statusCode == 200) {
-    var lines = body.split("\\r?\\n", -1);
-    self.sendSocketNotification('VACCINATIONS', lines[lines.length-1]);
+    var lines = response.body.split("\\r?\\n", -1);
+    self.sendSocketNotification('VACCINATIONS', lines);
   }
-})
+});
 
   },
   //Subclass socketNotificationReceived received.

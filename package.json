@@ -1,0 +1,26 @@
+{
+  "name": "mmm-covid19-ampel",
+  "version": "1.0.0",
+  "description": "A [MagicMirror²](https://magicmirror.builders) helper module to display the COVID 19 INCIDENCE Value in form of the five stages in Germany (Green, Yellow, Red, Dark - Red and Purple).",
+  "main": "MMM-COVID19-AMPEL.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magic21nrw/MMM-COVID19-AMPEL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/magic21nrw/MMM-COVID19-AMPEL/issues"
+  },
+  "homepage": "https://github.com/magic21nrw/MMM-COVID19-AMPEL#readme",
+  "dependencies": {
+    "date-and-time": "^0.14.1",
+    "moment": "^2.29.1",
+    "node-json-db": "^1.1.0",
+    "needle": "^2.6.0"
+  }
+}
