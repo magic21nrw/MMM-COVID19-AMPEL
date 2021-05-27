@@ -17,6 +17,11 @@ Clone this repository:
 git clone https://github.com/magic21nrw/MMM-COVID19-AMPEL.git
 ````
 
+run to install needed packages
+`````
+npm install
+````
+
 Add the module to the modules array in the `config/config.js` file:
 ````javascript
   {
@@ -84,7 +89,7 @@ The following properties can be configured:
 To update the module to the latest version, use your terminal to go to your MMM-COVID19-AMPEL module folder and type the following command:
 
 ````
-git pull
+git pull && npm install
 ```` 
 
 
