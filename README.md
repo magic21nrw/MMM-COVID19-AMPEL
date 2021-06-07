@@ -19,6 +19,7 @@ git clone https://github.com/magic21nrw/MMM-COVID19-AMPEL.git
 
 run to install needed packages
 ````
+cd MMM-COVID19-AMPEL
 npm install
 ````
 
