@@ -19,6 +19,7 @@ git clone https://github.com/magic21nrw/MMM-COVID19-AMPEL.git
 
 run to install needed packages
 ````
+cd MMM-COVID19-AMPEL
 npm install
 ````
 
@@ -37,7 +38,7 @@ The following properties can be configured:
 | Option                       | Description
 | ---------------------------- | -----------
 | `header`                     | The header text <br><br> **Default value:** `'COVID-19 Inzidenzwert'`
-| `cityID`                     | The ObjectID of the GEN City from this database in an array: `'https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data'` <br><br> **Possible values:** Array: `["224" , "223"]` for Ingolstadt and München <br> **Default value:** `["224"]`
+| `cityID`                     | The ObjectID of the GEN City from this database in an array: `'https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a786c17_0/data'` <br><br>Go on "map view" at the top right and click the area on the map to get the ObjectID.<br><br> **Possible values:** Array: `["224" , "223"]` for Ingolstadt and München <br> **Default value:** `["224"]`
 | `infoRowClass`               | The font size of data <br><br> **Possible values:** `'small'`, `'medium'` <br> **Default value:** `'small'`
 | `showUpdateDateInHeader`     | Show date of update in Header (of last received item) <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `true`
 | `showUpdateDateInRow`        | Show date of update in each row  <br><br> **Possible bool values:** `true`, `false` <br> **Default value:** `false`
