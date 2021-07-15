@@ -8,7 +8,7 @@
  */
 
 var NodeHelper = require('node_helper')
-var request = require('request')
+const fetch = require('node-fetch');
 var needle = require('needle');
 
 
@@ -35,18 +35,13 @@ module.exports = NodeHelper.create({
       }
       requestURL += incidentURLSuffix;
     }
-    var options = {
-      method: 'GET',
-      url: requestURL,
-      headers: {
-      }
-    }
-    request(options, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        var result = JSON.parse(body)
-        self.sendSocketNotification('INCIDENTS', result.features)
-      }
-    })
+
+    fetch(requestURL)
+    .then(res => res.text())
+    .then(body => { 
+      var result = JSON.parse(body)
+      self.sendSocketNotification('INCIDENTS', result.features)
+    });
 
 //Getting Vaccinations
 var options = {
