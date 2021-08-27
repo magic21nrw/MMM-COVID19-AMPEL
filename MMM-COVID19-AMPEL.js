@@ -75,8 +75,8 @@ Module.register("MMM-COVID19-AMPEL", {
       this.globalVaccinations = payload;
       var lines = this.globalVaccinations[this.globalVaccinations.length-1].split("\n");
       var result = lines[lines.length-2].split("\t");
-      this.globalVaccinations = result[10]*100;
-      this.globalSecondVaccination = result[11]*100;
+      this.globalVaccinations = result[20]*100;
+      this.globalSecondVaccination = result[21]*100;
       this.updateDom(self.config.fadeSpeed);
     }
   },
