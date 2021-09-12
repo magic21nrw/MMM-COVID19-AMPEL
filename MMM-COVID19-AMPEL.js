@@ -27,7 +27,7 @@ Module.register("MMM-COVID19-AMPEL", {
     numberOfDigits: 2,
     updateInterval: 3600000, // update interval in milliseconds
     fadeSpeed: 4000,
-    updateDate: "no update received yet",
+    updateDate: "",
   },
 
 
