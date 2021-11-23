@@ -75,11 +75,11 @@ Module.register("MMM-COVID19-AMPEL", {
       this.globalVaccinations = payload;
       var lines = this.globalVaccinations[this.globalVaccinations.length-1].split("\n");
       var result = lines[lines.length-2].split("\t");
-     // this.amountPeopleFirstVaccination = result[26]
+      var amountPeopleFirstVaccination = result[26]
       this.globalVaccinations = result[29]*100;
       this.globalSecondVaccination = result[30]*100;
-    //  this.totalPeople = this.amountPeopleFirstVaccination/this.globalVaccinations;
-    //  this.globalThirdVaccinations = result[28]*this.totalPeople;
+      var totalPeople = amountPeopleFirstVaccination/this.globalVaccinations;
+      this.globalThirdVaccinations = result[28]/totalPeople;
       this.updateDom(self.config.fadeSpeed);
     }
   },
@@ -91,7 +91,7 @@ Module.register("MMM-COVID19-AMPEL", {
       headerTitle += " - " + this.config.updateDate;
     }
     if (this.config.showVaccinations && !(this.globalVaccinations === null || this.globalVaccinations === undefined ))
-      headerTitle += " - " + vaccinationsLabel + " " + this.globalVaccinations.toFixed(this.config.numberOfDigits) + "% / " + this.globalSecondVaccination.toFixed(this.config.numberOfDigits) + "%";
+      headerTitle += " - " + vaccinationsLabel + " " + this.globalVaccinations.toFixed(this.config.numberOfDigits) + "% / " + this.globalSecondVaccination.toFixed(this.config.numberOfDigits) + "% / " + this.globalThirdVaccinations.toFixed(this.config.numberOfDigits) + "%";
     return headerTitle;
   },
 
