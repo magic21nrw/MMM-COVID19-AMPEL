@@ -75,12 +75,12 @@ Module.register("MMM-COVID19-AMPEL", {
       this.globalVaccinations = payload;
       var lines = this.globalVaccinations[this.globalVaccinations.length-1].split("\n");
       var result = lines[lines.length-2].split("\t");
-      var amountPeopleFirstVaccination = result[53]
-      this.globalVaccinations = result[57]*100;
-      this.globalSecondVaccination = result[58]*100;
+      var amountPeopleFirstVaccination = result[73]
+      this.globalVaccinations = result[79]*100;
+      this.globalSecondVaccination = result[80]*100;
       var totalPeople = amountPeopleFirstVaccination/this.globalVaccinations;
-      this.globalThirdVaccinations = result[55]/totalPeople;
-      this.globalFourthVaccinations = result[56]/totalPeople;
+      this.globalThirdVaccinations = result[75]/totalPeople;
+      this.globalFourthVaccinations = result[76]/totalPeople;
       this.updateDom(self.config.fadeSpeed);
     }
   },
